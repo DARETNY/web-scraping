@@ -22,7 +22,7 @@ class CombinedScraper:
 
     @staticmethod
     def normalize_data(df: pd.DataFrame, source: str) -> pd.DataFrame:
-        """Okul ve MEB verilerini normalize eder (büyük harf yapar, gereksiz karakterleri temizler)."""
+        """Okul ve MEB verilerini normalize eder (büyük harf yapar, gereksiz karakterleri temizlemek icin)."""
         df = df.copy()
         if source == "okul":
             df["ilçe"] = df["ilçe"].str.split("/").str[0].str.strip().str.upper()
@@ -34,8 +34,8 @@ class CombinedScraper:
 
     @staticmethod
     def compare_data(okul_df: pd.DataFrame, meb_df: pd.DataFrame) -> pd.DataFrame:
-        """MEB ve Okul verilerini karşılaştırarak eksik olanları çıkarır."""
-        # Veriyi temizle
+        """MEB ve Okul verilerini karşılaştırarak eksik olanları çıkarmak için."""
+
         okul_df = CombinedScraper.normalize_data(okul_df, "okul")
         meb_df = CombinedScraper.normalize_data(meb_df, "meb")
 

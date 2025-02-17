@@ -1,6 +1,6 @@
 from playwright.async_api import async_playwright
 import asyncio
-import pandas as pd  # Pandas'ı ekledik
+import pandas as pd
 
 
 class MebPageScraper:
@@ -73,7 +73,6 @@ class MebPageScraper:
 
                 await browser.close()
 
-                # Sütun adlarını güncelleyelim: Her satır için benzersiz bir ID (1, 2, 3...) ekle
                 columns = ["ID", "İl", "İlçe", "Kurum Adı", "Kurum Türü", "Adres", "Telefon 1", "Telefon 2",
                            "Kurum Kodu", "Web Sitesi"]
 
@@ -98,7 +97,5 @@ async def main():
         print("\n🔹 İlk 5 Kurum:")
         print(df_kurumlar)
 
-        # CSV olarak kaydetmek istersen:
+        # CSV olarak kaydetmek
         df_kurumlar.to_csv("kurumlar_listesi.csv", index=False, encoding="utf-8-sig")
-
-
