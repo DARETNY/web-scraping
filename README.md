@@ -1,9 +1,10 @@
 # Web Scraping Projesi
 
 Bu proje, `okul.com.tr` ve `mebbis.meb.gov.tr` sitelerinden veri çekerek, bu verileri normalize edip karşılaştıran bir **web scraping** projesidir. Proje, eksik kurumları tespit edip sonuçları CSV dosyası olarak kaydeder.
+(Not:Bu proje şuan sadece meb sitesindeki ilk 100 data ile Okul.com daki ilk 3 sayfasındaki verileri kıyaslamaktadır kodaki parameterler ile degişiklik yapılıp genişletilebilir)
 
 <img alt="proje ön izlemesi" height="500" src="presnt%2Foutput.gif" title="ShowCase" width="500"/>
----
+
 
 ## 🚀 Özellikler
 
