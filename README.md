@@ -2,6 +2,8 @@
 
 Bu proje, `okul.com.tr` ve `mebbis.meb.gov.tr` sitelerinden veri çekerek, bu verileri normalize edip karşılaştıran bir web scraping projesidir. Proje, eksik kurumları tespit edip sonuçları CSV dosyası olarak kaydeder.
 
+<img alt="output.gif" height="400" src="presnt%2Foutput.gif" title="proje önizleme" width="400"/>
+
 ## Gereksinimler
 
 - Python 3.7+
