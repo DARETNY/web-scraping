@@ -4,7 +4,7 @@ import pandas as pd
 
 
 class MebPageScraper:
-    def __init__(self, browser_path: str, url: str, row_number: int = 5):
+    def __init__(self, browser_path: str, url: str, row_number: int = 100):
         self.browser_path = browser_path
         self.url = url
         self.row_number = row_number
@@ -38,13 +38,13 @@ class MebPageScraper:
 
                 print("🔹 Kurum listeleme butonuna tıklanıyor...")
                 await page.evaluate("document.querySelector('#btnKurumListelex_I').click()")
-                await asyncio.sleep(5)  # Ekstra bekleme süresi ekledik
+                await asyncio.sleep(5)
 
                 print("🔹 Sayfa yükleniyor, lütfen bekleyin...")
                 await page.wait_for_load_state('networkidle', timeout=180000)
 
                 print("✅ Kurum listesini çekiyorum...")
-                await asyncio.sleep(3)  # Ekstra bekleme (sayfanın tüm içeriğinin yüklenmesi için)
+                await asyncio.sleep(3)
 
                 rows = await page.query_selector_all("tr.dxgvDataRow_DevEx")
                 print(f"✅ Bulunan satır sayısı: {len(rows)}")
@@ -97,5 +97,18 @@ async def main():
         print("\n🔹 İlk 5 Kurum:")
         print(df_kurumlar)
 
-        # CSV olarak kaydetmek
-        df_kurumlar.to_csv("kurumlar_listesi.csv", index=False, encoding="utf-8-sig")
+        # "Kurum Adı" sütununda "LİSESİ" geçenleri filtreleme
+        df_liseler = df_kurumlar[df_kurumlar["Kurum Adı"].str.contains(" LİSESİ", na=False, case=False)]
+
+        if not df_liseler.empty:
+            print("\n🔹 Filtrelenmiş Liseler:")
+            print(df_liseler)
+
+            # CSV olarak kaydetmek
+            df_liseler.to_csv("result/liseler_listesi.csv", index=False, encoding="utf-8-sig")
+
+
+
+
+# if __name__ == "__main__":
+#   asyncio.run(main())
