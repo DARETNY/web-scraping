@@ -22,7 +22,7 @@ class CombinedScraper:
 
     @staticmethod
     def normalize_data(df: pd.DataFrame, source: str) -> pd.DataFrame:
-        """Okul ve MEB verilerini normalize eder (büyük harf yapar, gereksiz karakterleri temizlemek icin)."""
+        """Verileri normalize eder (büyük harf yapar, gereksiz karakterleri temizler)."""
         df = df.copy()
         if source == "okul":
             df["ilçe"] = df["ilçe"].str.split("/").str[0].str.strip().str.upper()
@@ -34,7 +34,7 @@ class CombinedScraper:
 
     @staticmethod
     def compare_data(okul_df: pd.DataFrame, meb_df: pd.DataFrame) -> pd.DataFrame:
-        """MEB ve Okul verilerini karşılaştırarak eksik olanları çıkarmak için."""
+        """MEB ve Okul verilerini karşılaştırarak eksik olanları bulur."""
 
         okul_df = CombinedScraper.normalize_data(okul_df, "okul")
         meb_df = CombinedScraper.normalize_data(meb_df, "meb")
@@ -53,9 +53,7 @@ class CombinedScraper:
         missing_in_okul = merged[merged["_merge"] == "left_only"]
 
         # İlgili sütunları seç
-        result_df = missing_in_okul[[
-            "Kurum Adı", "İlçe", "Kurum Türü", "Adres", "Telefon 1", "Web Sitesi"
-        ]]
+        result_df = missing_in_okul[["Kurum Adı", "İlçe", "Kurum Türü", "Adres", "Telefon 1", "Web Sitesi"]]
 
         return result_df
 
@@ -75,15 +73,24 @@ async def main():
         ),
         combined.run_meb_scraper(url="https://mebbis.meb.gov.tr/kurumlistesi.aspx")
     )
-    comparison_df = CombinedScraper.compare_data(okul_df, meb_df)
+
+    # Filtreleme: Sadece "LİSESİ" geçenleri al
+    meb_liseler_df = meb_df[meb_df["Kurum Adı"].str.contains("LİSESİ", na=False, case=False)]
+
+    # Lise karşılaştırmasını yap
+    eksik_liseler_df = CombinedScraper.compare_data(okul_df, meb_liseler_df)
+
+    # Klasör oluştur
     if not os.path.exists("result"):
         os.makedirs("result")
+
     # Sonuçları kaydet
     okul_df.to_csv("result/okul_verileri.csv", index=False, encoding="utf-8-sig")
     meb_df.to_csv("result/meb_verileri.csv", index=False, encoding="utf-8-sig")
-    comparison_df.to_csv("result/eksik_kurumlar.csv", index=False, encoding="utf-8-sig")
+    meb_liseler_df.to_csv("result/meb_liseler.csv", index=False, encoding="utf-8-sig")
+    eksik_liseler_df.to_csv("result/eksik_liseler.csv", index=False, encoding="utf-8-sig")
 
-    print(f"\n✅ {len(comparison_df)} adet eksik okul bulundu ve 'eksik_kurumlar.csv' olarak kaydedildi.")
+    print(f"\n✅ {len(eksik_liseler_df)} adet eksik lise bulundu ve 'eksik_liseler.csv' olarak kaydedildi.")
 
 
 if __name__ == "__main__":
