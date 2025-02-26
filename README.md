@@ -63,3 +63,78 @@ Bu proje, `okul.com.tr` ve `mebbis.meb.gov.tr` sitelerinden veri çekerek, bu ve
 
 ---
 
+## 📚 Detaylı Kullanım Talimatları
+
+### Projeyi Çalıştırma
+
+1. **Python sanal ortamı oluşturun ve aktif hale getirin**:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # Windows için: venv\Scripts\activate
+    ```
+
+2. **Gerekli bağımlılıkları yükleyin**:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+3. **Playwright tarayıcılarını kurun**:
+    ```sh
+    playwright install
+    ```
+
+4. **Projeyi çalıştırın**:
+    ```sh
+    python tf.py
+    ```
+
+### Bağımlılıkları Yükleme
+
+Projede kullanılan tüm bağımlılıkları `requirements.txt` dosyasından yükleyebilirsiniz:
+```sh
+pip install -r requirements.txt
+```
+
+### Testleri Çalıştırma
+
+Testleri çalıştırmak için aşağıdaki komutu kullanabilirsiniz:
+```sh
+pytest
+```
+
+### Projeyi Çalıştırma
+
+1. **Python sanal ortamı oluşturun ve aktif hale getirin**:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # Windows için: venv\Scripts\activate
+    ```
+
+2. **Gerekli bağımlılıkları yükleyin**:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+3. **Playwright tarayıcılarını kurun**:
+    ```sh
+    playwright install
+    ```
+
+4. **Projeyi çalıştırın**:
+    ```sh
+    python tf.py
+    ```
+
+### Bağımlılıkları Yükleme
+
+Projede kullanılan tüm bağımlılıkları `requirements.txt` dosyasından yükleyebilirsiniz:
+```sh
+pip install -r requirements.txt
+```
+
+### Testleri Çalıştırma
+
+Testleri çalıştırmak için aşağıdaki komutu kullanabilirsiniz:
+```sh
+pytest
+```
