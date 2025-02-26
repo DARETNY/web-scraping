@@ -80,8 +80,3 @@ Before submitting your changes, please ensure that you have:
 
 If you encounter any issues while using the project, please report them by opening an issue on our [GitHub repository](https://github.com/DARETNY/web-scraping/issues). Provide as much detail as possible to help us understand and resolve the issue.
 
-## Contact
-
-If you have any questions or need further assistance, feel free to contact us at [email@example.com].
-
-Thank you for contributing!
